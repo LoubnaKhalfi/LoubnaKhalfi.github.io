@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loubna Khalfi | SOC Analyst & Cybersecurity Specialist</title>
-    <meta name="description" content="Cybersecurity professional specializing in SOC operations, SIEM, threat detection, and incident response. Master's in Information Systems Security.">
+    <title>Loubna Khalfi | Elite SOC Analyst</title>
     <style>
         * {
             margin: 0;
@@ -18,9 +17,9 @@
             --bg-card: #1a1f26;
             --neon-green: #00ff41;
             --neon-blue: #00d9ff;
+            --neon-purple: #b026ff;
             --text-primary: #e0e0e0;
             --text-secondary: #a0a0a0;
-            --accent: #00ff41;
         }
 
         body {
@@ -41,12 +40,6 @@
             opacity: 0.05;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         nav {
             position: fixed;
             top: 0;
@@ -55,6 +48,17 @@
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid var(--neon-green);
+            transition: all 0.3s;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 5px 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         nav .container {
@@ -69,6 +73,12 @@
             color: var(--neon-green);
             font-weight: bold;
             text-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .nav-links {
@@ -81,12 +91,43 @@
             color: var(--text-primary);
             text-decoration: none;
             transition: all 0.3s;
-            font-size: 0.9em;
+            position: relative;
+            padding: 5px 0;
         }
 
-        .nav-links a:hover {
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-green);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--neon-green);
+            transition: all 0.3s;
         }
 
         section {
@@ -99,23 +140,73 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 65, 0.1) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: float 10s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        .hero-content {
             text-align: center;
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-secondary) 100%);
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-content h1 {
-            font-size: 3.5em;
-            color: var(--neon-green);
+            font-size: clamp(2.5em, 8vw, 4em);
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-            text-shadow: 0 0 20px var(--neon-green);
-            animation: glitch 3s infinite;
+            animation: glitch 5s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 2px); filter: hue-rotate(10deg); }
+            94% { transform: translate(2px, -2px); filter: hue-rotate(-10deg); }
+            96% { transform: translate(-2px, -2px); filter: hue-rotate(5deg); }
         }
 
         .typing-text {
-            font-size: 1.5em;
+            font-size: clamp(1.2em, 3vw, 1.5em);
             color: var(--neon-blue);
-            margin-bottom: 30px;
             min-height: 60px;
+            margin-bottom: 20px;
         }
 
         .cursor {
@@ -132,18 +223,11 @@
             51%, 100% { opacity: 0; }
         }
 
-        @keyframes glitch {
-            0%, 90%, 100% { transform: translate(0); }
-            92% { transform: translate(-2px, 2px); }
-            94% { transform: translate(2px, -2px); }
-            96% { transform: translate(-2px, -2px); }
-        }
-
         .hero-subtitle {
-            font-size: 1.2em;
+            font-size: clamp(1em, 2vw, 1.2em);
             color: var(--text-secondary);
             margin-bottom: 40px;
-            max-width: 700px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -161,7 +245,6 @@
             background: transparent;
             color: var(--neon-green);
             text-decoration: none;
-            font-size: 1em;
             font-family: 'Courier New', monospace;
             transition: all 0.3s;
             cursor: pointer;
@@ -169,49 +252,105 @@
             overflow: hidden;
         }
 
-        .btn:hover {
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
             background: var(--neon-green);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
             color: var(--bg-dark);
-            box-shadow: 0 0 20px var(--neon-green);
+            box-shadow: 0 0 30px var(--neon-green);
+            transform: translateY(-3px);
         }
 
         .section-title {
-            font-size: 2.5em;
+            font-size: clamp(2em, 5vw, 3em);
             color: var(--neon-green);
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             text-align: center;
-            text-shadow: 0 0 15px var(--neon-green);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .section-title::before {
             content: '> ';
+            animation: blink 1s infinite;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
         }
 
         .about-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
         }
 
         .terminal-box {
             background: var(--bg-card);
             border: 1px solid var(--neon-green);
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 255, 65, 0.1);
+            transition: all 0.3s;
+            animation: slideIn 0.6s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .terminal-box:hover {
+            box-shadow: 0 15px 50px rgba(0, 255, 65, 0.3);
+            transform: translateY(-5px);
         }
 
         .terminal-header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 15px;
             display: flex;
             gap: 8px;
-            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
         }
 
         .terminal-btn {
             width: 12px;
             height: 12px;
             border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .terminal-btn:hover {
+            transform: scale(1.2);
         }
 
         .terminal-btn.red { background: #ff5f56; }
@@ -219,12 +358,9 @@
         .terminal-btn.green { background: #27c93f; }
 
         .terminal-content {
+            padding: 25px;
             color: var(--text-primary);
             line-height: 1.8;
-        }
-
-        .terminal-content p {
-            margin-bottom: 15px;
         }
 
         .prompt {
@@ -234,7 +370,7 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
@@ -242,24 +378,42 @@
         .skill-category {
             background: var(--bg-card);
             border: 1px solid var(--neon-green);
-            padding: 25px;
-            border-radius: 5px;
-            transition: all 0.3s;
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .skill-category:hover::before {
+            left: 100%;
         }
 
         .skill-category:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
-            transform: translateY(-5px);
+            box-shadow: 0 10px 50px rgba(0, 255, 65, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--neon-blue);
         }
 
         .skill-category h3 {
             color: var(--neon-blue);
-            margin-bottom: 20px;
-            font-size: 1.3em;
+            margin-bottom: 25px;
+            font-size: 1.4em;
         }
 
         .skill-item {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .skill-name {
@@ -274,28 +428,30 @@
             background: var(--bg-secondary);
             border-radius: 4px;
             overflow: hidden;
+            position: relative;
         }
 
         .skill-progress {
             height: 100%;
             background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
             border-radius: 4px;
-            transition: width 1s ease;
+            transition: width 1.5s ease;
+            box-shadow: 0 0 10px var(--neon-green);
         }
 
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            gap: 35px;
             margin-top: 50px;
         }
 
         .project-card {
             background: var(--bg-card);
             border: 1px solid var(--neon-green);
+            border-radius: 8px;
             padding: 30px;
-            border-radius: 5px;
-            transition: all 0.3s;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
         }
@@ -306,13 +462,14 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 40px rgba(0, 255, 65, 0.3);
+            transform: translateY(-10px) rotateX(2deg);
+            box-shadow: 0 20px 60px rgba(0, 255, 65, 0.4);
+            border-color: var(--neon-blue);
         }
 
         .project-card h3 {
@@ -323,8 +480,11 @@
 
         .project-card p {
             color: var(--text-secondary);
-            margin-bottom: 15px;
-            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .project-card strong {
+            color: var(--neon-blue);
         }
 
         .project-tags {
@@ -335,17 +495,24 @@
         }
 
         .tag {
-            padding: 5px 12px;
+            padding: 6px 14px;
             background: rgba(0, 255, 65, 0.1);
             border: 1px solid var(--neon-green);
-            border-radius: 3px;
+            border-radius: 20px;
             font-size: 0.85em;
             color: var(--neon-green);
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: var(--neon-green);
+            color: var(--bg-dark);
+            transform: scale(1.05);
         }
 
         .timeline {
             position: relative;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 50px auto;
         }
 
@@ -355,26 +522,53 @@
             left: 50%;
             top: 0;
             bottom: 0;
-            width: 2px;
-            background: var(--neon-green);
+            width: 3px;
+            background: linear-gradient(180deg, var(--neon-green), var(--neon-blue));
+            box-shadow: 0 0 10px var(--neon-green);
         }
 
         .timeline-item {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             position: relative;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--neon-green);
+            border: 4px solid var(--bg-dark);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--neon-green);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
         }
 
         .timeline-content {
             background: var(--bg-card);
             border: 1px solid var(--neon-green);
+            border-radius: 8px;
             padding: 25px;
-            border-radius: 5px;
             width: 45%;
-            position: relative;
+            transition: all 0.3s;
         }
 
         .timeline-item:nth-child(odd) .timeline-content {
             margin-left: auto;
+        }
+
+        .timeline-content:hover {
+            box-shadow: 0 10px 40px rgba(0, 255, 65, 0.3);
+            transform: scale(1.03);
         }
 
         .timeline-content h3 {
@@ -388,14 +582,52 @@
             margin-bottom: 10px;
         }
 
-        .contact {
-            background: var(--bg-secondary);
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
 
-        .contact-content {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .cert-card::after {
+            content: '🏆';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            opacity: 0.2;
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover::after {
+            opacity: 1;
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        .cert-card:hover {
+            box-shadow: 0 10px 50px rgba(0, 217, 255, 0.4);
+            transform: translateY(-8px);
+            border-color: var(--neon-green);
+        }
+
+        .cert-card h3 {
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+        }
+
+        .cert-provider {
+            color: var(--neon-green);
+            font-size: 0.9em;
+            margin-bottom: 15px;
         }
 
         .contact-info {
@@ -409,124 +641,138 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             color: var(--text-primary);
             text-decoration: none;
+            padding: 15px 25px;
+            border: 1px solid var(--neon-green);
+            border-radius: 8px;
             transition: all 0.3s;
         }
 
         .contact-item:hover {
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
+            background: var(--neon-green);
+            color: var(--bg-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.5);
         }
 
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px;
             background: var(--bg-dark);
             border-top: 1px solid var(--neon-green);
             color: var(--text-secondary);
         }
 
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2em;
-            }
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--neon-green);
+            border: none;
+            border-radius: 50%;
+            color: var(--bg-dark);
+            font-size: 1.5em;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+        }
 
-            .typing-text {
-                font-size: 1.2em;
-            }
+        .scroll-top.visible {
+            opacity: 1;
+        }
 
-            .about-content {
-                grid-template-columns: 1fr;
-            }
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.6);
+        }
 
-            .nav-links {
-                gap: 15px;
-                font-size: 0.85em;
-            }
-
+        @media (max-width: 1024px) {
             .timeline::before {
-                left: 20px;
+                left: 30px;
             }
 
             .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px !important;
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+
+            .timeline-item::after {
+                left: 21px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .about-content,
+            .skills-grid,
+            .projects-grid,
+            .certifications-grid {
+                grid-template-columns: 1fr;
             }
 
             section {
                 padding: 80px 0;
             }
         }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-20px); }
-            60% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-        }
-
-        .cert-card {
-            background: var(--bg-card);
-            border: 1px solid var(--neon-blue);
-            padding: 25px;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        .cert-card:hover {
-            box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .cert-card h3 {
-            color: var(--neon-blue);
-            margin-bottom: 10px;
-        }
-
-        .cert-provider {
-            color: var(--neon-green);
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
     </style>
 </head>
 <body>
     <canvas id="matrix-bg"></canvas>
 
-    <nav>
+    <nav id="navbar">
         <div class="container">
             <div class="logo">{'LK_SOC'}</div>
-            <ul class="nav-links">
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
         <div class="hero-content">
             <h1>LOUBNA KHALFI</h1>
-            <div class="typing-text" id="typing-text"></div>
+            <div class="typing-text" id="typingText"></div>
             <p class="hero-subtitle">
                 Master's in Information Systems Security | SOC Analyst | Threat Detection Specialist<br>
                 Defending systems through proactive threat hunting, incident response, and security intelligence
@@ -535,9 +781,6 @@
                 <a href="#projects" class="btn">View Projects</a>
                 <a href="#contact" class="btn">Contact Me</a>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <span style="color: var(--neon-green); font-size: 2em;">↓</span>
         </div>
     </section>
 
@@ -592,23 +835,23 @@
                     <h3>⚔️ Cybersecurity</h3>
                     <div class="skill-item">
                         <div class="skill-name"><span>Penetration Testing</span><span>90%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>SIEM (Splunk, Wazuh, ELK)</span><span>95%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="95"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Incident Response</span><span>88%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="88"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Network Security</span><span>92%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="92"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Digital Forensics</span><span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
                     </div>
                 </div>
 
@@ -616,111 +859,103 @@
                     <h3>🛠️ Security Tools</h3>
                     <div class="skill-item">
                         <div class="skill-name"><span>Metasploit & Exploitation</span><span>87%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 87%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="87"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Nmap & Reconnaissance</span><span>93%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 93%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="93"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Wireshark & Traffic Analysis</span><span>90%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Burp Suite & Web Security</span><span>88%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="88"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Nessus, OpenVAS, OWASP ZAP</span><span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3>💻 Programming & Scripting</h3>
+                    <h3>💻 Programming</h3>
                     <div class="skill-item">
                         <div class="skill-name"><span>Python (Security Tools)</span><span>92%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="92"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Bash & PowerShell</span><span>88%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="88"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>SQL & Database Security</span><span>90%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="90"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>C/C++ & Java</span><span>82%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 82%"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name"><span>JavaScript, PHP, C#</span><span>80%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="82"></div></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3>🔧 Infrastructure & DevSecOps</h3>
+                    <h3>🔧 Infrastructure</h3>
                     <div class="skill-item">
                         <div class="skill-name"><span>Linux Administration</span><span>93%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 93%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="93"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Docker & Kubernetes</span><span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Firewalls & VPN</span><span>88%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="88"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Active Directory Security</span><span>82%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 82%"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name"><span>Jenkins & CI/CD Security</span><span>80%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="82"></div></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3>📋 Compliance & Standards</h3>
+                    <h3>📋 Compliance</h3>
                     <div class="skill-item">
                         <div class="skill-name"><span>ISO 27001</span><span>87%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 87%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="87"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>NIST Framework</span><span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>CIS Controls</span><span>83%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 83%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="83"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>GDPR Compliance</span><span>80%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="80"></div></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3>🗄️ Databases & Frameworks</h3>
+                    <h3>🗄️ Databases</h3>
                     <div class="skill-item">
                         <div class="skill-name"><span>MySQL, PostgreSQL</span><span>88%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="88"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>MongoDB, Oracle</span><span>82%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 82%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="82"></div></div>
                     </div>
                     <div class="skill-item">
                         <div class="skill-name"><span>Spring Boot, Node.js</span><span>85%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="85"></div></div>
                     </div>
                     <div class="skill-item">
-                        <div class="skill-name"><span>React.js & RESTful APIs</span><span>83%</span></div>
-                        <div class="skill-bar"><div class="skill-progress" style="width: 83%"></div></div>
+                        <div class="skill-name"><span>React.js & APIs</span><span>83%</span></div>
+                        <div class="skill-bar"><div class="skill-progress" data-width="83"></div></div>
                     </div>
                 </div>
             </div>
@@ -732,24 +967,23 @@
             <h2 class="section-title">Security Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>🔍 Predictive IDS with ML Integration</h3>
+                    <h3>🔍 Predictive IDS with ML</h3>
                     <p><strong>Goal:</strong> Develop an intelligent intrusion detection system leveraging machine learning for predictive threat analysis.</p>
-                    <p><strong>Implementation:</strong> Integrated Wazuh SIEM with ELK Stack and custom ML models to predict and detect security threats before exploitation.</p>
-                    <p><strong>Impact:</strong> Enhanced threat detection accuracy by implementing predictive analytics, reducing false positives and improving incident response time.</p>
+                    <p><strong>Implementation:</strong> Integrated Wazuh SIEM with ELK Stack and custom ML models to predict and detect security threats.</p>
+                    <p><strong>Impact:</strong> Enhanced threat detection accuracy, reducing false positives and improving response time.</p>
                     <div class="project-tags">
                         <span class="tag">Wazuh</span>
                         <span class="tag">ELK Stack</span>
                         <span class="tag">Machine Learning</span>
                         <span class="tag">Python</span>
-                        <span class="tag">IDS</span>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>🛡️ Enterprise SIEM Deployment (OCP Group)</h3>
+                    <h3>🛡️ Enterprise SIEM Deployment</h3>
                     <p><strong>Goal:</strong> Deploy comprehensive SIEM solution for proactive threat detection in enterprise environment.</p>
-                    <p><strong>Implementation:</strong> Configured and optimized Splunk SIEM with custom detection rules, real-time monitoring dashboards, and automated incident response workflows.</p>
-                    <p><strong>Impact:</strong> Established centralized security monitoring capability, enabling rapid threat detection and response across enterprise infrastructure.</p>
+                    <p><strong>Implementation:</strong> Configured Splunk SIEM with custom detection rules, real-time monitoring dashboards, and automated incident response.</p>
+                    <p><strong>Impact:</strong> Established centralized security monitoring, enabling rapid threat detection across enterprise infrastructure.</p>
                     <div class="project-tags">
                         <span class="tag">Splunk</span>
                         <span class="tag">SIEM</span>
@@ -759,10 +993,10 @@
                 </div>
 
                 <div class="project-card">
-                    <h3>🔬 Vulnerability Assessment & Penetration Testing Lab</h3>
-                    <p><strong>Goal:</strong> Conduct comprehensive security assessments on simulated enterprise environments to identify vulnerabilities before attackers do.</p>
-                    <p><strong>Implementation:</strong> Performed penetration testing using Metasploit, Nmap, and Burp Suite on isolated lab environments, documenting findings and remediation strategies.</p>
-                    <p><strong>Impact:</strong> Discovered critical vulnerabilities in test systems, provided detailed security reports with remediation recommendations aligned with industry standards.</p>
+                    <h3>🔬 Penetration Testing Lab</h3>
+                    <p><strong>Goal:</strong> Conduct comprehensive security assessments on simulated enterprise environments.</p>
+                    <p><strong>Implementation:</strong> Performed penetration testing using Metasploit, Nmap, and Burp Suite, documenting findings and remediation strategies.</p>
+                    <p><strong>Impact:</strong> Discovered critical vulnerabilities, provided detailed security reports with remediation recommendations.</p>
                     <div class="project-tags">
                         <span class="tag">Penetration Testing</span>
                         <span class="tag">Metasploit</span>
@@ -773,41 +1007,39 @@
 
                 <div class="project-card">
                     <h3>📊 Security Analytics Dashboard</h3>
-                    <p><strong>Goal:</strong> Design SOC-grade security monitoring dashboard for real-time threat visualization and incident tracking.</p>
-                    <p><strong>Implementation:</strong> Developed interactive security dashboard integrating SIEM data, displaying key security metrics, threat trends, and incident timelines.</p>
-                    <p><strong>Impact:</strong> Provided security team with centralized visibility into threat landscape, enabling faster decision-making and incident prioritization.</p>
+                    <p><strong>Goal:</strong> Design SOC-grade security monitoring dashboard for real-time threat visualization.</p>
+                    <p><strong>Implementation:</strong> Developed interactive security dashboard integrating SIEM data, displaying security metrics and threat trends.</p>
+                    <p><strong>Impact:</strong> Provided centralized visibility into threat landscape, enabling faster decision-making and incident prioritization.</p>
                     <div class="project-tags">
                         <span class="tag">Security Analytics</span>
-                        <span class="tag">Data Visualization</span>
+                        <span class="tag">Visualization</span>
                         <span class="tag">SOC Operations</span>
                         <span class="tag">Threat Intelligence</span>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>🔐 Compliance Scanner (Python)</h3>
+                    <h3>🔐 Compliance Scanner</h3>
                     <p><strong>Goal:</strong> Automate security compliance auditing against industry standards (ISO 27001, CIS, NIST).</p>
-                    <p><strong>Implementation:</strong> Built Python-based automated scanner to assess system configurations against security baselines, generating detailed compliance reports.</p>
-                    <p><strong>Impact:</strong> Reduced manual audit time significantly while improving accuracy and consistency of compliance assessments across infrastructure.</p>
+                    <p><strong>Implementation:</strong> Built Python-based automated scanner to assess system configurations, generating detailed compliance reports.</p>
+                    <p><strong>Impact:</strong> Reduced manual audit time while improving accuracy and consistency of compliance assessments.</p>
                     <div class="project-tags">
                         <span class="tag">Python</span>
                         <span class="tag">Compliance</span>
                         <span class="tag">Automation</span>
                         <span class="tag">ISO 27001</span>
-                        <span class="tag">NIST</span>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>🌐 Secure Web Application Development</h3>
-                    <p><strong>Goal:</strong> Design and implement security-first web applications with comprehensive protection against common vulnerabilities.</p>
-                    <p><strong>Implementation:</strong> Developed multiple web applications (internship management, restaurant management, BI dashboards) with secure coding practices, input validation, and authentication mechanisms.</p>
-                    <p><strong>Impact:</strong> Delivered production-ready applications with zero critical vulnerabilities, implementing OWASP Top 10 countermeasures and secure development lifecycle practices.</p>
+                    <h3>🌐 Secure Web Applications</h3>
+                    <p><strong>Goal:</strong> Design security-first web applications with comprehensive protection against common vulnerabilities.</p>
+                    <p><strong>Implementation:</strong> Developed applications with secure coding practices, input validation, and authentication mechanisms.</p>
+                    <p><strong>Impact:</strong> Delivered production-ready applications with zero critical vulnerabilities, implementing OWASP Top 10 countermeasures.</p>
                     <div class="project-tags">
                         <span class="tag">Secure Development</span>
                         <span class="tag">OWASP</span>
                         <span class="tag">Web Security</span>
-                        <span class="tag">Spring Boot</span>
                         <span class="tag">React.js</span>
                     </div>
                 </div>
@@ -823,7 +1055,7 @@
                     <div class="timeline-content">
                         <h3>Predictive IDS Development</h3>
                         <p class="timeline-date">SecDojo | Final Year Project</p>
-                        <p>Designed and deployed machine learning-enhanced intrusion detection system integrating Wazuh SIEM and ELK Stack for advanced threat prediction and automated response capabilities.</p>
+                        <p>Designed and deployed machine learning-enhanced intrusion detection system integrating Wazuh SIEM and ELK Stack for advanced threat prediction.</p>
                     </div>
                 </div>
 
@@ -831,7 +1063,7 @@
                     <div class="timeline-content">
                         <h3>SIEM Implementation Engineer</h3>
                         <p class="timeline-date">OCP Group</p>
-                        <p>Led Splunk SIEM deployment project, configured custom detection rules for enterprise threats, established real-time monitoring infrastructure, and provided incident response support.</p>
+                        <p>Led Splunk SIEM deployment project, configured custom detection rules, established real-time monitoring infrastructure.</p>
                     </div>
                 </div>
 
@@ -839,7 +1071,7 @@
                     <div class="timeline-content">
                         <h3>Security-Focused BI Developer</h3>
                         <p class="timeline-date">OmegaSoft</p>
-                        <p>Developed secure business intelligence dashboards with encrypted data transmission, implemented secure authentication, and integrated with Sage 100 database using security best practices.</p>
+                        <p>Developed secure business intelligence dashboards with encrypted data transmission and secure authentication.</p>
                     </div>
                 </div>
 
@@ -847,113 +1079,107 @@
                     <div class="timeline-content">
                         <h3>Full-Stack Security Developer</h3>
                         <p class="timeline-date">WebySIT | EST Agadir</p>
-                        <p>Built secure web applications implementing OWASP security guidelines, developed internship management system and restaurant management platform with comprehensive security controls.</p>
+                        <p>Built secure web applications implementing OWASP security guidelines with comprehensive security controls.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="certifications" style="background: var(--bg-secondary); min-height: auto; padding: 80px 0;">
+    <section id="certifications" style="background: var(--bg-secondary);">
         <div class="container">
-            <h2 class="section-title">Certifications & Training</h2>
+            <h2 class="section-title">Certifications</h2>
             <div class="certifications-grid">
                 <div class="cert-card">
                     <h3>Security Operations (SOC)</h3>
                     <p class="cert-provider">TCM Security</p>
-                    <p>Advanced training in threat monitoring, incident analysis, and SOC tool utilization including SIEM and SOAR platforms for enterprise security operations.</p>
+                    <p>Advanced training in threat monitoring, incident analysis, and SOC tool utilization including SIEM and SOAR platforms.</p>
                 </div>
 
                 <div class="cert-card">
                     <h3>Practical Ethical Hacking</h3>
                     <p class="cert-provider">TCM Security</p>
-                    <p>Hands-on penetration testing methodologies covering vulnerability assessment, exploitation techniques, post-exploitation, and real-world attack simulations.</p>
+                    <p>Hands-on penetration testing methodologies covering vulnerability assessment, exploitation techniques, and attack simulations.</p>
                 </div>
 
                 <div class="cert-card">
                     <h3>CompTIA Security+</h3>
                     <p class="cert-provider">CompTIA</p>
-                    <p>Foundational cybersecurity certification covering risk management, network security, threat detection, compliance, and security best practices.</p>
+                    <p>Foundational cybersecurity certification covering risk management, network security, threat detection, and compliance.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-content">
-                <h2 class="section-title">Establish Connection</h2>
-                <p style="font-size: 1.2em; margin-bottom: 30px; color: var(--text-secondary);">
-                    Ready to strengthen your security posture? Let's discuss how I can contribute to your SOC team.
-                </p>
-                <div class="terminal-box" style="max-width: 600px; margin: 0 auto 40px;">
-                    <div class="terminal-header">
-                        <span class="terminal-btn red"></span>
-                        <span class="terminal-btn yellow"></span>
-                        <span class="terminal-btn green"></span>
-                    </div>
-                    <div class="terminal-content">
-                        <p><span class="prompt">security@network:~$</span> whois loubna-khalfi</p>
-                        <p style="color: var(--neon-green);">Status: Available for SOC Analyst positions</p>
-                        <p style="color: var(--neon-green);">Location: Morocco (Remote/Hybrid options)</p>
-                        <p style="color: var(--neon-green);">Focus: Blue Team Operations, Threat Detection, Incident Response</p>
-                        <p style="color: var(--neon-green);">Response Time: < 24 hours</p>
-                    </div>
+    <section id="contact" style="background: var(--bg-dark);">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Establish Connection</h2>
+            <p style="font-size: 1.2em; margin-bottom: 30px; color: var(--text-secondary); max-width: 700px; margin-left: auto; margin-right: auto;">
+                Ready to strengthen your security posture? Let's discuss how I can contribute to your SOC team.
+            </p>
+            <div class="terminal-box" style="max-width: 600px; margin: 0 auto 40px;">
+                <div class="terminal-header">
+                    <span class="terminal-btn red"></span>
+                    <span class="terminal-btn yellow"></span>
+                    <span class="terminal-btn green"></span>
                 </div>
-                <div class="contact-info">
-                    <a href="mailto:loubnakhalfi166@gmail.com" class="contact-item">
-                        <span style="font-size: 1.5em;">📧</span>
-                        <span>loubnakhalfi166@gmail.com</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/loubna-khalfi-a71b73199/" target="_blank" class="contact-item">
-                        <span style="font-size: 1.5em;">💼</span>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/loubnaKhalfi" target="_blank" class="contact-item">
-                        <span style="font-size: 1.5em;">💻</span>
-                        <span>GitHub</span>
-                    </a>
-                    <span class="contact-item">
-                        <span style="font-size: 1.5em;">📱</span>
-                        <span>+212 651 504 847</span>
-                    </span>
+                <div class="terminal-content">
+                    <p><span class="prompt">security@network:~$</span> whois loubna-khalfi</p>
+                    <p style="color: var(--neon-green);">Status: Available for SOC Analyst positions</p>
+                    <p style="color: var(--neon-green);">Location: Morocco (Remote/Hybrid)</p>
+                    <p style="color: var(--neon-green);">Focus: Blue Team Operations, Threat Detection</p>
+                    <p style="color: var(--neon-green);">Response Time: < 24 hours</p>
                 </div>
+            </div>
+            <div class="contact-info">
+                <a href="mailto:loubnakhalfi166@gmail.com" class="contact-item">
+                    <span style="font-size: 1.5em;">📧</span>
+                    <span>Email</span>
+                </a>
+                <a href="https://www.linkedin.com/in/loubna-khalfi-a71b73199/" target="_blank" class="contact-item">
+                    <span style="font-size: 1.5em;">💼</span>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/loubnaKhalfi" target="_blank" class="contact-item">
+                    <span style="font-size: 1.5em;">💻</span>
+                    <span>GitHub</span>
+                </a>
+                <span class="contact-item">
+                    <span style="font-size: 1.5em;">📱</span>
+                    <span>+212 651 504 847</span>
+                </span>
             </div>
         </div>
     </section>
 
     <footer>
         <p>© 2025 Loubna Khalfi | SOC Analyst | Defending Digital Frontiers</p>
-        <p style="margin-top: 10px; color: var(--neon-green); font-size: 0.9em;">root@defense:~# stay_vigilant --always</p>
+        <p style="margin-top: 10px; color: var(--neon-green);">root@defense:~# stay_vigilant --always</p>
     </footer>
 
+    <button class="scroll-top" id="scrollTop">↑</button>
+
     <script>
-        // Matrix rain effect
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?";
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
         const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
+        const cols = canvas.width / fontSize;
+        const drops = Array(Math.floor(cols)).fill(1);
 
         function drawMatrix() {
             ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
             ctx.fillStyle = '#00ff41';
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < drops.length; i++) {
-                const text = matrix[Math.floor(Math.random() * matrix.length)];
+                const text = chars[Math.floor(Math.random() * chars.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
@@ -972,92 +1198,108 @@
             "Proactive Defense. Intelligent Detection. Rapid Response."
         ];
         
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById('typing-text');
+        let phraseIdx = 0, charIdx = 0, isDeleting = false;
+        const typingEl = document.getElementById('typingText');
 
         function type() {
-            const currentPhrase = phrases[phraseIndex];
+            const current = phrases[phraseIdx];
+            typingEl.innerHTML = current.substring(0, isDeleting ? charIdx-- : charIdx++) + '<span class="cursor"></span>';
             
-            if (isDeleting) {
-                typingElement.innerHTML = currentPhrase.substring(0, charIndex - 1) + '<span class="cursor"></span>';
-                charIndex--;
-            } else {
-                typingElement.innerHTML = currentPhrase.substring(0, charIndex + 1) + '<span class="cursor"></span>';
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                typeSpeed = 2000;
+            let speed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIdx === current.length) {
+                speed = 2000;
                 isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
+            } else if (isDeleting && charIdx === 0) {
                 isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typeSpeed = 500;
+                phraseIdx = (phraseIdx + 1) % phrases.length;
+                speed = 500;
             }
-
-            setTimeout(type, typeSpeed);
+            setTimeout(type, speed);
         }
-
         type();
 
-        // Smooth scrolling
+        // Particles
+        const particlesEl = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particlesEl.appendChild(particle);
+        }
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
 
         // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    
+                    if (entry.target.classList.contains('skill-category')) {
+                        const bars = entry.target.querySelectorAll('.skill-progress');
+                        bars.forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width') + '%';
+                        });
+                    }
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.project-card, .skill-category, .timeline-item, .cert-card').forEach(el => {
+        document.querySelectorAll('.project-card, .skill-category, .timeline-item, .cert-card, .terminal-box').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'all 0.6s ease-out';
             observer.observe(el);
         });
 
-        // Active nav link on scroll
+        // Active nav on scroll
+        const navbar = document.getElementById('navbar');
+        const scrollTop = document.getElementById('scrollTop');
+        
         window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+            scrollTop.classList.toggle('visible', window.scrollY > 300);
+
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-links a');
             
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
+                if (scrollY >= (sectionTop - 200)) current = section.getAttribute('id');
             });
 
             navLinks.forEach(link => {
-                link.style.color = 'var(--text-primary)';
-                link.style.textShadow = 'none';
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.style.color = 'var(--neon-green)';
-                    link.style.textShadow = '0 0 10px var(--neon-green)';
-                }
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) link.classList.add('active');
+            });
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
             });
         });
     </script>
